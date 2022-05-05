@@ -1,0 +1,5 @@
+.eslintrc.*
+jest.config.*
+node_modules
+build
+coverage
