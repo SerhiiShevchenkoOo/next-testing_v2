@@ -1,6 +1,6 @@
 {
   "name": "next-testing",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,7 +9,7 @@
     "lint": "next lint --dir src",
     "test": "jest",
     "prepare": "husky install",
-    "commit": "git-cz",
+    "cz": "git-cz",
     "lint-staged": "lint-staged"
   },
   "dependencies": {
@@ -28,6 +28,7 @@
     "@types/react-dom": "18.0.3",
     "@typescript-eslint/eslint-plugin": "^5.22.0",
     "@typescript-eslint/parser": "^5.22.0",
+    "cz-conventional-changelog": "3.3.0",
     "eslint": "^8.14.0",
     "eslint-config-next": "12.1.6",
     "eslint-plugin-jest": "^26.1.5",
@@ -44,5 +45,10 @@
   "lint-staged": {
     "*.(ts|js)x?": "eslint --cache --fix",
     "*": "prettier --write --ignore-unknown"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
