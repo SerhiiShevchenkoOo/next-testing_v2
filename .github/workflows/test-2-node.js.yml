@@ -25,7 +25,7 @@ jobs:
           # SonarCloud access token should be generated from https://sonarcloud.io/account/security/
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           EXTRA_ARGS: >
-            -Dsonar.projectKey=${secrets.SerhiiShevchenkoOo_next-testing_v2}
+            -Dsonar.projectKey=${secrets.SONAR_PROJECTKEY}
             -Dsonar.organization=serhiishevchenkooo
             -Dsonar.sources=src
             -Dsonar.exclusions="**/*.css"
@@ -36,8 +36,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
-        matrix-include: ["${secret.sssh_key}"]
+        node-version: [16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
