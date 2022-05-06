@@ -5,17 +5,39 @@ name: Node.js CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, developments]
   pull_request:
     branches: ["*"]
 
 jobs:
+  sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0
+      - name: Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # SonarCloud access token should be generated from https://sonarcloud.io/account/security/
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          EXTRA_ARGS: >
+            -Dsonar.projectKey=${secrets.SerhiiShevchenkoOo_next-testing_v2}
+            -Dsonar.organization=serhiishevchenkooo
+            -Dsonar.sources=src
+            -Dsonar.exclusions="**/*.css"
+            -Dsonar.tests=src
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
   build:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         node-version: [14.x, 16.x]
+        matrix-include: ["${secret.sssh_key}"]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
