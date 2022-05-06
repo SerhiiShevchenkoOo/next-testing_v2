@@ -25,12 +25,7 @@ jobs:
           # SonarCloud access token should be generated from https://sonarcloud.io/account/security/
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           args: >
-            -Dsonar.projectKey=${secrets.SONAR_PROJECTKEY}
-            -Dsonar.organization=serhiishevchenkooo
-            -Dsonar.sources=src
-            -Dsonar.exclusions="**/*.css"
-            -Dsonar.tests=src
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            Dproject.settings=./sonar-project.properties
   build:
     runs-on: ubuntu-latest
 
