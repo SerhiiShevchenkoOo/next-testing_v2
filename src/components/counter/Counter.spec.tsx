@@ -1,5 +1,5 @@
 /* eslint-disable testing-library/no-render-in-setup */
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { Counter } from "./Counter";
 import user from "@testing-library/user-event";
 
@@ -26,6 +26,7 @@ describe("Counter", () => {
         await user.click(
           screen.getByRole("button", { name: "Add to Counter" })
         );
+        await screen.findByText("Current Count: 15");
       });
 
       it('renders "Current Count: 15"', () => {
@@ -58,6 +59,7 @@ describe("Counter", () => {
         await user.click(
           screen.getByRole("button", { name: "Subtract from Counter" })
         );
+        await screen.findByText("Current Count: -15");
       });
 
       it('renders "Current Count: -15"', () => {
@@ -86,7 +88,9 @@ describe("Counter", () => {
         );
       });
 
-      it('renders "Current count: 1"', () => {
+      it('renders "Current count: 1"', async () => {
+        const label = await screen.findByText("Current Count: -1");
+        await waitFor(() => expect(label).toBeInTheDocument());
         expect(screen.getByText("Current Count: -1")).toBeInTheDocument();
       });
     });
@@ -98,7 +102,9 @@ describe("Counter", () => {
         );
       });
 
-      it('renders "Current count: -1"', () => {
+      it('renders "Current count: -1"', async () => {
+        const label = await screen.findByText("Current Count: 1");
+        await waitFor(() => expect(label).toBeInTheDocument());
         expect(screen.getByText("Current Count: 1")).toBeInTheDocument();
       });
     });
