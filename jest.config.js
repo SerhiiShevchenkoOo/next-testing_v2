@@ -16,4 +16,7 @@ module.exports = {
       statements: 100,
     },
   },
+  moduleNameMapper: {
+    "\\.(css)$": "identity-obj-proxy",
+  },
 };
